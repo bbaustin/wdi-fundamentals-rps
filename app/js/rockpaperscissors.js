@@ -35,6 +35,8 @@ function getComputerMove(move) {
     return move || randomPlay();
 }
 
+
+
 function getWinner(playerMove,computerMove) {
     var winner;
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
@@ -56,16 +58,40 @@ function getWinner(playerMove,computerMove) {
     	winner = 'player';
     } else if (playerMove === 'scissors' && computerMove === 'rock') {
     	winner = 'computer'; }
+      else {
+      	winner = 'error'; }
     
     return winner;
 }
 
+
+
 function playToFive() {
-    console.log("Let's play Rock, Paper, Scissors");
-    var playerWins = 0;
-    var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
+   var playerWins = 0;
+   var computerWins = 0;
+   var playerMove;
+   var computerMove;
+   var winner;
+   
+   while (playerWins < 5 && computerWins < 5) {
+   playerMove = getInput();
+   computerMove = randomPlay();
+   winner = getWinner(playerMove, computerMove)
+   
+   if (winner === "tie")  {
+		console.log("Both players played " + playerMove + ". Score is PLAYER- " + playerWins + ", CPU " + computerWins + ".");
+	} else if (winner === "player")  {
+		playerWins += 1;
+		console.log("Player played " + playerMove + " and CPU played " + computerMove + ". Player wins! Score is PLAYER- " + playerWins + ", CPU- " + computerWins + ". ");
+	} else if (winner === "computer")  {
+		computerWins += 1;
+		console.log("Player played " + playerMove + " and CPU played " + computerMove + ". CPU wins! Score is PLAYER- " + playerWins + ", CPU- " + computerWins + ". " );
+	}  else  {
+		console.log("Please try again.");
+		}
+	}   
+	
+    
     return [playerWins, computerWins];
 }
 
